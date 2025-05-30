@@ -101,25 +101,6 @@ DELETE	/api/books/:id	Delete book by ID	None	Success message or error
 
 
 
-Project Structure
-
-.
-├── drizzle.config.ts
-├── package.json
-├── pnpm-lock.yaml
-├── README.md
-├── src
-│   ├── book
-│   │   ├── book.controller.ts   # API logic and response handling
-│   │   ├── book.route.ts        # Express routes for book endpoints
-│   │   └── book.service.ts      # Business logic and DB operations
-│   ├── drizzle
-│   │   ├── db.ts                # Drizzle ORM DB connection setup
-│   │   ├── migrate.ts           # DB migration scripts
-│   │   ├── schema.ts            # DB schema definitions
-│   │   └── seed.ts              # Seed data scripts
-│   └── server.ts                # Express app entry point
-└── tsconfig.json                # TypeScript configuration
 
 
 Error Handling
@@ -135,10 +116,6 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 License
 This project is licensed under the MIT License.
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by @Boaz Limo
 
 
-
----
-
-Would you like me to help you add badges, setup scripts, or prepare deployment instructions next?
