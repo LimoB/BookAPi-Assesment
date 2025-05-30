@@ -1,18 +1,15 @@
+// src/book/book.route.ts
 import { Router } from "express";
-import { getBooks } from "./book.controller";
-
-
 import {
   createBook,
   deleteBook,
-//   getBooks,
+  getBooks,
   getBookById,
   updateBook,
 } from "./book.controller";
 
 const bookRouter = Router();
 
-// 📚 Book routes
 bookRouter.get("/books", getBooks);
 bookRouter.get("/books/:id", getBookById);
 bookRouter.post("/books", createBook);

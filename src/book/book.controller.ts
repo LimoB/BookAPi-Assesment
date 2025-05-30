@@ -8,73 +8,80 @@ import {
   updateBookServices,
 } from "./book.service";
 
-export const getBooks = async (req: Request, res: Response): Promise<Response> => {
+export const getBooks = async (req: Request, res: Response): Promise<void> => {
   try {
     const allBooks = await getBooksServices();
     if (!allBooks || allBooks.length === 0) {
-      return res.status(404).json({ message: "No books found" });
+      res.status(404).json({ message: "No books found" });
+      return;
     }
-    return res.status(200).json(allBooks);
+    res.status(200).json(allBooks);
   } catch (error: any) {
-    return res.status(500).json({ error: error.message || "Failed to fetch books" });
+    res.status(500).json({ error: error.message || "Failed to fetch books" });
   }
 };
 
-export const getBookById = async (req: Request, res: Response): Promise<Response> => {
+export const getBookById = async (req: Request, res: Response): Promise<void> => {
   const bookId = parseInt(req.params.id);
   if (isNaN(bookId)) {
-    return res.status(400).json({ error: "Invalid book ID" });
+    res.status(400).json({ error: "Invalid book ID" });
+    return;
   }
   try {
     const book = await getBookByIdServices(bookId);
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      res.status(404).json({ message: "Book not found" });
+      return;
     }
-    return res.status(200).json(book);
+    res.status(200).json(book);
   } catch (error: any) {
-    return res.status(500).json({ error: error.message || "Failed to fetch book" });
+    res.status(500).json({ error: error.message || "Failed to fetch book" });
   }
 };
 
-export const createBook = async (req: Request, res: Response): Promise<Response> => {
+export const createBook = async (req: Request, res: Response): Promise<void> => {
   const { title, author, year, genre } = req.body;
   if (!title || !author || !year || !genre) {
-    return res.status(400).json({ error: "All fields (title, author, year, genre) are required" });
+    res.status(400).json({ error: "All fields (title, author, year, genre) are required" });
+    return;
   }
   try {
     const message = await createBookServices({ title, author, year, genre });
-    return res.status(201).json({ message });
+    res.status(201).json({ message });
   } catch (error: any) {
-    return res.status(500).json({ error: error.message || "Failed to create book" });
+    res.status(500).json({ error: error.message || "Failed to create book" });
   }
 };
 
-export const updateBook = async (req: Request, res: Response): Promise<Response> => {
+export const updateBook = async (req: Request, res: Response): Promise<void> => {
   const bookId = parseInt(req.params.id);
   if (isNaN(bookId)) {
-    return res.status(400).json({ error: "Invalid book ID" });
+    res.status(400).json({ error: "Invalid book ID" });
+    return;
   }
   const { title, author, year, genre } = req.body;
   if (!title || !author || !year || !genre) {
-    return res.status(400).json({ error: "All fields (title, author, year, genre) are required" });
+    res.status(400).json({ error: "All fields (title, author, year, genre) are required" });
+    return;
   }
   try {
     const message = await updateBookServices(bookId, { title, author, year, genre });
-    return res.status(200).json({ message });
+    res.status(200).json({ message });
   } catch (error: any) {
-    return res.status(500).json({ error: error.message || "Failed to update book" });
+    res.status(500).json({ error: error.message || "Failed to update book" });
   }
 };
 
-export const deleteBook = async (req: Request, res: Response): Promise<Response> => {
+export const deleteBook = async (req: Request, res: Response): Promise<void> => {
   const bookId = parseInt(req.params.id);
   if (isNaN(bookId)) {
-    return res.status(400).json({ error: "Invalid book ID" });
+    res.status(400).json({ error: "Invalid book ID" });
+    return;
   }
   try {
     const message = await deleteBookServices(bookId);
-    return res.status(200).json({ message });
+    res.status(200).json({ message });
   } catch (error: any) {
-    return res.status(500).json({ error: error.message || "Failed to delete book" });
+    res.status(500).json({ error: error.message || "Failed to delete book" });
   }
 };
